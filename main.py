@@ -88,7 +88,7 @@ if __name__ == "__main__":
                     #     print('無効：' + url)
                     debug_print('----------------- search word : {0}({1}ページ目 - {2}件)'.format(word, page + 1, len(events)))
                     if len(events) == 0:
-                        break
+                        continue
                     else:
                         for event in events:
                              # Define label based on the stars given to the review
