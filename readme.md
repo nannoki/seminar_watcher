@@ -5,53 +5,37 @@ connpassで、キーワードに合致する今日以降に実施される東京
 ## 実行環境
 - os不問
 - python3
-- 必要なライブラリ
-（どれが追加インストールが必要か管理していなかったので、他にあるかも。逆に標で入っているかも。importのところを見れば必要なものはわかる。）
-	- requests
-	- BeautifulSoup4
-	- smtplib
-	- email
+
 
 ## インストール
-- 上記ライブラリをpip、condaでインストール。
+- 必要なライブラリをpip、condaでインストール。（何のライブラリが必要かまでは書きません）
 - 本モジュールは、任意のディレクトリに置けばよい。
-- "(カレントディレクトリ：main.pyがあるところ)/data" の中に、通知済み確認用の「checklist.txt」というファイルが作成されます。存在しない場合は作成されます。   
-checklist.txtにないものは新着として扱われる為、checklist.txtがない状態での初回実行時は、
+- "(カレントディレクトリ：exec_main.pyがあるところ)/data" の中に、通知済み確認用の「past_articles.txt」というファイルが作成されます。存在しない場合は作成されます。   
+past_articles.txtにないものは新着として扱われる為、past_articles.txtがない状態での初回実行時は、
 実行日以降に開催される公開中のイベントは全て新着扱いになり、全て通知が配信されます。
 メールは一通のみですが、Slackは大量の通知が発生します。  
-もしそれを避けたい場合は、DEBUG=Trueとして一度実行するとchecklist.txtが作成される為、
-その後は新たに公開されたもののみが新着として扱われます。
+もしそれを避けたい場合は、DEBUG=Trueとして実行してpast_articles.txtを作成し、
+その後はDEBUG=Falseに切り替えておけば、新たに公開されたもののみが新着として扱われます。
 
 
 ## 設定すべきパラメータ
-- main.py
+- exec_main.py
 	- `SLEEP_MIN` : チェックを行う間隔。（分）
-    - `NB_GETPAGES` : スクレイピングするページ数。
     - `DEBUG` : デバッグモード。メール、slack配信はしない。 /data/checklist.txt は更新する。
-- ./setting/target.py
+- ./settings/target.py
     - 監視対象のキーワード。空白は＋でつなぐ。例：`deep+learning`
-- ./setting/private.py
-    このファイルは個人設定を含む為、git管理対象外。private_sample.pyを参考に。
-    - `FROMADDRESS` : 送信元メールアドレス。
-    - `PW` : 送信者のパスワード
-    - `TOADDRESS` : 送信先メールアドレス。社外OK。
-    - `SMTPSV` : smtpサーバ。
-    - `SLACK_API_TOKEN` : Slack APIのアクセストークン
-    - `SLACK_CHANNEL` : 投稿先のchannel名
-    - `SLACK_CHANNEL_TEST` : テスト投稿先のchannel名。test_slack.pyを使用する時のみ。
+- ./settings/private.py
+    git対象外の設定ファイル。private_sample.pyを参考に。
 
 
 ## 実行方法
-   ターミナル、コマンドプロンプトで、 `python main.py`　と入力、実行。
+   ターミナル、コマンドプロンプトで、 `python exec_main.py`　と入力、実行。
 
 
-## 改善すべきこと
-- スクレイピングのループを、ページ＞キーワード　の順にしているが、これだと無駄なページへのアクセスが発生するので、キーワード（ここで件数を取得して、ページ数を把握＞ページ の順にすべき。   
-※ ただ、後述のとおり、やるならスクレイピングをやめてAPI化なので、放置している。
+
 
 ## 今後やりたいこと
 - AWS Lamda + DynamoDB に移行
-- GitHubの公開リポジトリに移行し、コントリビュータにフォークして開発してもらう。
 - ユーザー個別の設定、配信
   自分が登録したキーワードに新着があったら、Slackに通知(「@xxx 新着があります[....]」)   
   現在URLのみの通知に、@user を追加しても良い。

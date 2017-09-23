@@ -7,7 +7,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 from email import charset
-from setting import private
+from settings import private
 
 from_address = private.FROM_ADDRESS
 to_address = private.TO_ADDRESS
