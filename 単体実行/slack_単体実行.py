@@ -7,28 +7,9 @@
 このスクリプトを実行する。
 """
 
-import requests
-from bs4 import BeautifulSoup
-import csv
-import re
-import time
-import datetime
-import os.path
-import sendmail     # オリジナル
-
-# from slackbot.bot import Bot
 from slacker import Slacker
-from setting import target
-# Git管理対象外
-from setting import private
+from settings import post2slack_private as setting
 
-
-##################################################################
-SLEEP_MIN = 3       # チェックする間隔（分）
-NB_GETPAGES = 10     # スクレイピングするページ数。せいぜい１０ページ。
-DEBUG = True        # デバッグモード
-
-##################################################################
 
 class Slack(object):
     __slacker = None
@@ -52,11 +33,10 @@ class Slack(object):
 
 if __name__ == "__main__":
 
-
-    slack = Slack(private.SLACK_API_TOKEN)
+    slack = Slack(setting.API_TOKEN)
 
     msg = 'pythonからの投稿テスト'
     attachments = {}
 
-    slack.post_message_to_channel(private.SLACK_CHANNEL_TEST, msg, attachments)
+    slack.post_message_to_channel(setting.DEFAULT_CHANNEL, msg, attachments)
     print('メッセージをslackに投稿しました : [{}]'.format(msg))
