@@ -10,6 +10,8 @@
 from slacker import Slacker
 from settings import post2slack_private as setting
 
+import sys
+sys.path.append('../')
 
 class Slack(object):
     __slacker = None

@@ -57,7 +57,7 @@ if __name__ == "__main__":
         if result['status']['ok']:
             all_events = result['events']
         else:
-            print('APIでエラー : [{}] {}'.format(result['status_code'], result['reason']))
+            print('APIでエラー : [{}] {}'.format(result['status']['status_code'], result['status']['reason']))
             # slackに通知するとエラーが出続ける。でも多分日をまたぐとか時間をおくとエラーは解消するので、停止したくない。
             # todo 今後わかるようにしたい。
 

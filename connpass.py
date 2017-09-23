@@ -30,8 +30,8 @@ class ConnpassApi:
         self.n_get_data = 100
 
         # システム設定 ###################################
-        # 一度に検索するキーワード数（検索結果が多すぎるとエラーになることがあった）。40を超えると怪しい。
-        self.batch_size = 20
+        # 一度に検索するキーワード数（検索結果が多すぎるとエラーになるっぽい。40を超えると怪しい。）
+        self.batch_size = 30
         # リクエスト連投で空ける時間（秒）。１秒以上。
         self.request_sleep_sec = 3
 
@@ -87,9 +87,10 @@ class ConnpassApi:
                     start += int(r.json()['results_returned'])
                     n_all_result = int(r.json()['results_available'])   # 同じキーワードなら、連続して検索しても同じ
                 else:
-                    break
+                    return {'status': {'ok': r.ok, 'status_code': r.status_code, 'reason': r.reason},
+                            'events': all_events}
 
-            return {'status': {'ok': r.ok, 'status_code': r.status_code, 'reason': r.reason},
+        return {'status': {'ok': r.ok, 'status_code': r.status_code, 'reason': r.reason},
                 'events': all_events}
 
 
