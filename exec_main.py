@@ -18,10 +18,10 @@ from connpass import ConnpassApi
 from post2slack import Post2Slack
 
 ##################################################################
-SLEEP_MIN = 5       # チェックする間隔（分）
+SLEEP_MIN = 8       # チェックする間隔（分）
 DEBUG = False        # デバッグモード True/False
 PAST_ARTICLES_FILE = './data/past_articles.txt'     # 通知済みリスト。新着チェック用。
-SLACK_CHANNEL = 'seminor'  #seminor, bot_test, sandbox
+SLACK_CHANNEL = 'セミナー情報'  #seminor, bot_test, sandbox
 ##################################################################
 
 def debug_print(msg):
