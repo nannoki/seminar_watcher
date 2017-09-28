@@ -22,7 +22,7 @@ SEARCH_WORDS = [
     'MCMC',
     'ベイズ',
     'テキストマイニング',
-    'クラウド',
+    # 'クラウド',
     'Azure',
     'GCP',
     'AWS',
@@ -38,10 +38,10 @@ SEARCH_WORDS = [
     'DevOps',
     'ChatOps',
     'UX',
-    'ブロックチェーン',
-    'blockchain',
-    'fintech',
-    'フィンテック',
+    # 'ブロックチェーン',
+    # 'blockchain',
+    # 'fintech',       # ぼんやりとしたものが多いので対象外
+    # 'フィンテック',    # ぼんやりとしたものが多いので対象外
     'docker',
     'slack',
     'Ruby+on+Rails',
