@@ -44,3 +44,4 @@ past_articles.txtにないものは新着として扱われる為、past_article
     参考
     http://qiita.com/kiida/items/373446edd2fb09da82ca
 - 金融庁、日銀、経産省などのお知らせも同様に監視
+- サービスでエラーが派生した時は、slack, メールで
