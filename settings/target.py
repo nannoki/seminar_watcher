@@ -26,13 +26,16 @@ SEARCH_WORDS = [
     'Azure',
     'GCP',
     'AWS',
-    'google+cloud',
+    # 'google+cloud',
     'nosql',
+    # 'mysql',  # sql入門とかでヒットが多すぎる
+    'postgresql',
     'ビッグデータ',
     'spark',
     'ハッカソン',
     '統計',
     '数学',
+    'docker',
     '自動化',
     'CI',
     'DevOps',
@@ -42,13 +45,12 @@ SEARCH_WORDS = [
     # 'blockchain',
     # 'fintech',       # ぼんやりとしたものが多いので対象外
     # 'フィンテック',    # ぼんやりとしたものが多いので対象外
-    'docker',
     'slack',
-    'Ruby+on+Rails',
-    'CakePHP',
-    'PHP',
+    # 'Ruby+on+Rails',
+    # 'CakePHP',
+    # 'PHP',
     'node.js',
-    'リーンスタートアップ',
+    # 'リーンスタートアップ',
     'アジャイル',
     'スクラム',
     '効率化',
@@ -56,6 +58,6 @@ SEARCH_WORDS = [
     'ワークスタイル',
     '人事',
     '労務',
-    'RPA',
+    # 'RPA',
     '働き方改革'
 ]
