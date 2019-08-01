@@ -18,7 +18,7 @@ from connpass import ConnpassApi
 from post2slack import Post2Slack
 
 ##################################################################
-SLEEP_MIN = 8       # チェックする間隔（分）
+SLEEP_MIN = 15       # チェックする間隔（分）
 DEBUG = False        # デバッグモード True/False
 PAST_ARTICLES_FILE = './data/past_articles.txt'     # 通知済みリスト。新着チェック用。
 SLACK_CHANNEL = 'セミナー情報'  #seminor, bot_test, sandbox
@@ -51,6 +51,8 @@ if __name__ == "__main__":
         start_time = time.time()
         maillist = ''
         urllist = []
+        # 追加
+        all_events = None
 
         # connpassのデータを取得
         result = cp.get_all_result()
@@ -61,16 +63,21 @@ if __name__ == "__main__":
             # slackに通知するとエラーが出続ける。でも多分日をまたぐとか時間をおくとエラーは解消するので、停止したくない。
             # todo 今後わかるようにしたい。
 
-        # 配信済みリストと照らしあわせて、なかったら新着とする
-        for event_date, event_title, event_url in all_events:
-            checkstring = event_date[:-9] + '  ' + event_title
-            if checkstring not in checkset:
-                print('新着: ', checkstring)
-                with open(PAST_ARTICLES_FILE, mode='a', encoding='utf-8') as f:
-                    f.write(checkstring + '\n')
-                checkset.add(checkstring)
-                maillist = maillist + ('* ' + event_title + '\n\n')
-                urllist.append(event_url)
+        # 20181105 追加 初回でresultがエラーになるとall_eventsがnullとなって落ちることへの対処
+        if all_events is not None:
+            # 20181105 修正 for文をif文内に移動
+            # 配信済みリストと照らしあわせて、なかったら新着とする
+            # ----------ここから----------
+            for event_date, event_title, event_url in all_events:
+                checkstring = event_date[:-9] + '  ' + event_title
+                if checkstring not in checkset:
+                    print('新着: ', checkstring)
+                    with open(PAST_ARTICLES_FILE, mode='a', encoding='utf-8') as f:
+                        f.write(checkstring + '\n')
+                    checkset.add(checkstring)
+                    maillist = maillist + ('* ' + event_title + '\n\n')
+                    urllist.append(event_url)
+            # ----------ここまで----------
 
         if len(maillist) != 0:
             if DEBUG:
